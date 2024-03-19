@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crypto Price Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #333;
+      border-radius: 10px;
+      padding: 20px;
+      width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: none;
+      background-color: #444;
+      color: #fff;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #009688;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #00796b;
+    }
+
+    #price-display {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Crypto Price Checker</h1>
+    <select id="crypto-select">
+      <option value="BTC">Bitcoin</option>
+      <option value="ETH">Ethereum</option>
+      <option value="LTC">Litecoin</option>
+      <option value="XRP">XRP</option>
+      <option value="BNB">Binance Coin</option>
+    </select>
+    <select id="currency-select">
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="JPY">Japanese Yen</option>
+      <option value="GBP">British Pound</option>
+      <option value="INR">Indian Rupee</option>
+    </select>
+    <button onclick="getCryptoPrice()">Check Price</button>
+    <p id="price-display"></p>
+  </div>
+
+  <script>
+  const cryptoSelect = document.getElementById('crypto-select');
+  const currencySelect = document.getElementById('currency-select');
+  const priceDisplay = document.getElementById('price-display');
+
+  // Add more cryptocurrencies to this array
+  const availableCryptos = ["BTC", "ETH", "LTC", "XRP", "BNB"];
+
+  // Add more currencies to this array
+  const availableCurrencies = ["USD", "EUR", "JPY", "GBP", "INR"];
+
+  function getCryptoPrice() {
+    const selectedCrypto = cryptoSelect.value;
+    const selectedCurrency = currencySelect.value;
+
+    // Check if selected crypto and currency are valid
+    if (!availableCryptos.includes(selectedCrypto) || !availableCurrencies.includes(selectedCurrency)) {
+      priceDisplay.textContent = "Invalid selection. Please choose a valid currency and cryptocurrency.";
+      return;
+    }
+
+    const url = `https://min-api.cryptocompare.com/data/pricemulti?fsyms=${selectedCrypto}&tsyms=${selectedCurrency}`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        const price = data[selectedCrypto][selectedCurrency];
+
+        // Handle Rupee display
+        if (selectedCurrency === "INR") {
+          priceDisplay.textContent = `${selectedCrypto} price in ₹: ${price}`;
+        } else {
+          priceDisplay.textContent = `${selectedCrypto} price in ${selectedCurrency}: ${price}`;
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        priceDisplay.textContent = "Error fetching price. Please try again.";
+      });
+  }
+  </script>
+</body>
+</html>
+
+
+

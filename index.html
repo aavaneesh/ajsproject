@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cryptocurrency Tools</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #333;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 30px;
+      color: #fff;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    button {
+      padding: 15px 30px;
+      margin: 0 20px;
+      font-size: 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #009688;
+      color: #fff;
+      transition: background-color 0.3s, transform 0.3s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+      background-color: #00796b;
+      transform: translateY(-2px);
+    }
+
+    button:focus {
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Welcome to Cryptocurrency Tools</h1>
+  
+    <div class="btn-container">
+        
+        <button id="converterBtn">Cryptocurrency Converter</button>
+        <button id="priceTrackerBtn">Price Tracker</button>
+      
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("priceTrackerBtn").addEventListener("click", function() {
+      //window.open("price_tracker.html", "_blank"); 
+      window.location.href = "price_tracker.html"; 
+    });
+
+    document.getElementById("converterBtn").addEventListener("click", function() {
+      window.location.href = "converter.html"; 
+    });
+  </script>
+  
+</body>
+</html>
+
+
